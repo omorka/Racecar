@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project by Onyeka Morka</title>
+    <title>Racecar: A Coding Project by Onyeka Morka</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
     <!-- NAV SECTION -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/index.html"><img src="img/Icon.svg" class="d-inline-block align-text-top" width="30" height="24">APP NAME</a>
+            <a class="navbar-brand" href="/index.html"><img src="img/Icon.svg" class="d-inline-block align-text-top" width="30" height="24">Racecar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
                         <a class="nav-link active" aria-current="page" href="/code.html">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/omorka/Racecar">Git Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="https://omorka.netlify.app/">About Me</a>
@@ -52,23 +52,120 @@
     <!-- MAIN SECTION -->
     <main class="flex-shrink-0">
         <div class="container py-4 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for Racecar</h2>
             <div class="row row-cols-1 row-cols-md-2">
-                <div class="col-md-8">
+                <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            //Call Hello World
-                            function helloWorld()
+                            //get the string from the html document
+                            function getString()
                             {
-                                alert("Hello World!");
+                                //hide the alert box
+                                document.getElementById("alert").classList.add("invisible");
+
+                                //get the string value and change it all to lower case
+                                let palindrome = document.getElementById("palindrome").value;
+                                let pLower = palindrome.toLowerCase();
+                                let pArray = [];
+
+                                //loop over the lowercase array and add only lowercase letters to the pArray array
+                                for(let i = 0; i <= pLower.length; i++)
+                                {
+                                    let code = pLower.charCodeAt(i);
+
+                                    //97 = a | 122 = z
+                                    if (code > 96 && code < 123)
+                                    {
+                                        pArray += pLower[i];
+                                    }
+                                }
+
+                                //check if pArray is a palindrome and return an object to be displayed
+                                let returnOBJ = palindromeCheck(pArray);
+                                displayPalindrome(returnOBJ);
                             }
                         </code>
                     </pre>
                 </div>
-                <div class="col-md-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+                <div class="col-lg-4">
+                    <h5>GetString() Method</h5>
+                    <p>The <strong>getString()</strong> method gets the string the user inputs from the HTML and stores it in a javascript value that is then changed to a lowerCase string and is then checked for only lower case characters.</p>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col-lg-8">
+                    <pre class="line-numbers">
+                        <code class="language-javascript">
+                            //check if string is a palindrome
+                            function palindromeCheck(pArray)
+                            {
+                                let pCheck = [];
+                                let returnOBJ = {};
+
+                                //reverse the string and add it to pCheck
+                                for(let i = pArray.length - 1; i >= 0; i--)
+                                {
+                                    pCheck += pArray[i];
+                                }
+                                //store reversed string into return object
+                                returnOBJ.reverseString = pCheck;
+
+                                //if reversed string is equal to entered string then it must be a palindrome
+                                if (pCheck == pArray)
+                                {
+                                    returnOBJ.boolean = true;
+                                }
+                                else
+                                {
+                                    returnOBJ.boolean = false;
+                                }
+
+                                return returnOBJ;
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-lg-4">
+                    <h5>PalindromeCheck() Method</h5>
+                    <p>The <strong>palindromeCheck()</strong> method has 1 parameter called <strong>pArray</strong> and iterates from the end of the array to the beginning and adds the characters to the <strong>pCheck</strong> string array that then gets checked to see if it is equivalent to <strong>pArray</strong> and then stores both the boolean value and reversed string into a <strong>returnOBJ</strong> object.</p>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-lg-2">
+                <div class="col-lg-8">
+                    <pre class="line-numbers">
+                        <code class="language-javascript">
+                            //display the values
+                            function displayPalindrome(returnOBJ)
+                            {
+                                //check if the reversed string was confirmed a palindrome or not
+                                if (returnOBJ.boolean)
+                                {
+                                    //display a green alert box and remove the red one
+                                    document.getElementById("alertHeader").parentElement.classList.add("alert-success");
+                                    document.getElementById("alertHeader").parentElement.classList.remove("alert-danger");
+                                    document.getElementById("alertHeader").innerHTML = "Success!";
+                                }
+                                else
+                                {
+                                    //display a red alert box and remove the green one
+                                    document.getElementById("alertHeader").parentElement.classList.remove("alert-success");
+                                    document.getElementById("alertHeader").parentElement.classList.add("alert-danger");
+                                    document.getElementById("alertHeader").innerHTML = "Not a Palindrome!";
+                                }
+
+                                //write reversed string
+                                document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnOBJ.reverseString}`;
+
+                                //show alert box
+                                document.getElementById("alert").classList.remove("invisible");
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-lg-4">
+                    <h5>DisplayPalindrome() Method</h5>
+                    <p>The <strong>displayPalindrome()</strong> method takes in the object 
+                    from the <strong>palindromeCheck</strong> method and writes the reversed it to the HTML document. If the string was a palindrome a green alert box with the success message pops up. If not, then a red one pops up.</p>
                 </div>
             </div>
         </div>

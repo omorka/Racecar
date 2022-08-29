@@ -1,7 +1,7 @@
 :root{
-    --primary-color: #1e5b8e;
-    --secondary-color: #ff993b;
-    --dark-color: #292929;
+    --primary-color: #4dbbff;
+    --secondary-color: #ff914d;
+    --dark-color: #804927;
     --white-color: #dff3e4;
 }
 
@@ -31,6 +31,12 @@ nav{
 
 .checklist >li i{
     color: var(--secondary-color);
+}
+
+@media screen and (max-width: 991.33px) {
+    .border-end {
+        border: none !important;
+    }
 }
 
 code[class*="language-"], pre[class*="language-"] {
